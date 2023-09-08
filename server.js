@@ -18,7 +18,8 @@ app.use(bodyParser.json());
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://remight-logistics.vercel.app"],
+    origin: ["http://localhost:3000", 
+    "https://e-commerce-frontend-lime-eight.vercel.app", "https://outlook.live.com"],
     credentials: true,
   })
 );
