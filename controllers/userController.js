@@ -10,7 +10,7 @@ const crypto = require("crypto");
 const Cryptr = require("cryptr");
 const { OAuth2Client } = require("google-auth-library");
 
-const cryptr = new Cryptr(process.env.CRYPTR_KEY);
+const cryptr = new Cryptr('757e2bcb3706a3ebe51d8c2f3108c95386b6becfc1e1aae7a02e26c806e29c371a7c48ba8d991c1f5fbc104e98eb045301add531ab7b3d902866f4a177636264');
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
