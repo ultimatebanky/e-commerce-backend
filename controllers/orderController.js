@@ -3,21 +3,39 @@ const Order = require("../models/orderModel");
 
 
 const createOrder = asyncHandler(async (req, res) => {
-    const { firstName, lastName, email, pickup_add, destination, phone, weight, description, service_type, additional_info } = req.body;
+    const { firstName,
+       lastName,
+       email,
+       pickup_add,
+       destination,
+       phone,
+       weight,
+       description,
+       service_type,
+       additional_info } = req.body;
   
     // Validation
-    if (firstName || !lastName || !email || !pickup_add || !destination || !phone || !weight || !description || !service_type || !additional_info) {
-      res.status(400);
-      throw new Error("Please fill in all the required fields.");
-    }
+    // if (firstName || 
+    //   !lastName || 
+    //   !email || 
+    //   !pickup_add || 
+    //   !destination || 
+    //   !phone || 
+    //   !weight || 
+    //   !description || 
+    //   !service_type || 
+    //   !additional_info) {
+    //   res.status(400);
+    //   throw new Error("Please fill in all the required fields.");
+    // }
   
-    //   Create new user
-    const user = await Order.create({
+    //   Create new order
+    const order = await Order.create({
         firstName, lastName, email, pickup_add, destination, phone, weight, description, service_type, additional_info
     });
   
     
-    if (user) {
+    if (order) {
       const { _id, firstName, lastName, email, pickup_add, destination, phone, weight, description, service_type, additional_info } = user;
   
       res.status(201).json({
