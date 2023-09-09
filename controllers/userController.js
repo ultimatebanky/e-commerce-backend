@@ -10,7 +10,7 @@ const crypto = require("crypto");
 const Cryptr = require("cryptr");
 const { OAuth2Client } = require("google-auth-library");
 
-const cryptr = new Cryptr('757e2bcb3706a3ebe51d8c2f3108c95386b6becfc1e1aae7a02e26c806e29c371a7c48ba8d991c1f5fbc104e98eb045301add531ab7b3d902866f4a177636264');
+const cryptr = new Cryptr(process.env.CRYPTR_KEY);
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
@@ -194,10 +194,10 @@ const sendLoginCode = asyncHandler(async (req, res) => {
   const decryptedLoginCode = cryptr.decrypt(loginCode);
 
   // Send Login Code
-  const subject = "Login Access Code - AUTH:Z";
+  const subject = "Login Access Code";
   const send_to = email;
   const sent_from = process.env.EMAIL_USER;
-  const reply_to = "noreply@zino.com";
+  const reply_to = "noreply@remightlogistics.com";
   const template = "loginCode";
   const name = user.name;
   const link = decryptedLoginCode;
@@ -319,10 +319,10 @@ const sendVerificationEmail = asyncHandler(async (req, res) => {
   const verificationUrl = `${process.env.FRONTEND_URL}/verify/${verificationToken}`;
 
   // Send Email
-  const subject = "Verify Your Account - AUTH:Z";
+  const subject = "Verify Your Account";
   const send_to = user.email;
   const sent_from = process.env.EMAIL_USER;
-  const reply_to = "noreply@zino.com";
+  const reply_to = "noreply@remightlogistics.com";
   const template = "verifyEmail";
   const name = user.name;
   const link = verificationUrl;
@@ -571,10 +571,10 @@ const forgotPassword = asyncHandler(async (req, res) => {
   const resetUrl = `${process.env.FRONTEND_URL}/resetPassword/${resetToken}`;
 
   // Send Email
-  const subject = "Password Reset Request - AUTH:Z";
+  const subject = "Password Reset Request";
   const send_to = user.email;
   const sent_from = process.env.EMAIL_USER;
-  const reply_to = "noreply@zino.com";
+  const reply_to = "noreply@remightlogistics.com";
   const template = "forgotPassword";
   const name = user.name;
   const link = resetUrl;
