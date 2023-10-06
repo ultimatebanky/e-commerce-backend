@@ -125,11 +125,28 @@ const createOrder = asyncHandler(async (req, res) => {
     }
   });
   
+  const upgradeOrder = asyncHandler(async (req, res) => {
+    const { status, id } = req.body;
   
+    const order = await Order.findById(id);
+  
+    if (!order) {
+      res.status(404);
+      throw new Error("Order not found");
+    }
+  
+    order.status = status;
+    await order.save();
+  
+    res.status(200).json({
+      message: `Order upgraded`,
+    });
+  });
 
   module.exports = {
     createOrder,
     updateOrder,
+    upgradeOrder,
     getOrder,
     getOrders,
     deleteOrder
