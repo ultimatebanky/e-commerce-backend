@@ -6,9 +6,9 @@ const router = express.Router();
 router
 .post('/create',protect, createOrder)
 .post('/upgrade',protect, upgradeOrder)
-.patch('/update', adminOnly, protect, updateOrder)
+.patch('/update', protect, updateOrder)
 .get('/getOrders', protect, getOrders)
 .get('/getOrder', protect, getOrder)
-.delete('/:id',  adminOnly, protect, deleteOrder)
+.delete('/:id', protect, deleteOrder)
 
 module.exports = router

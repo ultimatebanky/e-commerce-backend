@@ -49,7 +49,7 @@ const orderSchema = mongoose.Schema(
       required: true,
     },
     status:{
-      type: Boolean,
+      type: String,
       default: 'order placed'
     }
   },
