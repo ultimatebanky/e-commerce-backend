@@ -12,7 +12,9 @@ const createOrder = asyncHandler(async (req, res) => {
        weight,
        description,
        service_type,
-       additional_info } = req.body;
+       additional_info,
+      status
+     } = req.body;
   
     // Validation
     // if (firstName || 
@@ -31,15 +33,15 @@ const createOrder = asyncHandler(async (req, res) => {
   
     //   Create new order
     const order = await Order.create({
-        firstName, lastName, email, pickup_add, destination, phone, weight, description, service_type, additional_info
+        firstName, lastName, email, pickup_add, destination, phone, weight, description, service_type, additional_info, status
     });
   
     
     if (order) {
-      const { _id, firstName, lastName, email, pickup_add, destination, phone, weight, description, service_type, additional_info } = user;
+      const { _id, firstName, lastName, email, pickup_add, destination, phone, weight, description, service_type, additional_info, status } = user;
   
       res.status(201).json({
-        _id, firstName, lastName, email, pickup_add, destination, phone, weight, description, service_type, additional_info
+        _id, firstName, lastName, email, pickup_add, destination, phone, weight, description, service_type, additional_info, status
       });
     } else {
       res.status(400);
@@ -51,7 +53,7 @@ const createOrder = asyncHandler(async (req, res) => {
     const order = await Order.findById(req.order._id);
   
     if (order) {
-      const { firstName, lastName, email, pickup_add, destination, phone, weight, description, service_type, additional_info } = order;
+      const { firstName, lastName, email, pickup_add, destination, phone, weight, description, service_type, additional_info, status } = order;
   
       order.email = email;
       order.firstName = req.body.firstName || firstName;
@@ -63,6 +65,7 @@ const createOrder = asyncHandler(async (req, res) => {
       order.description = req.body.description || description;
       order.service_type = req.body.service_type || service_type;
       order.additional_info = req.body.additional_info || additional_info;
+      order.status = req.body.status || status;
   
       const updatedOrder = await order.save();
   
@@ -78,10 +81,11 @@ const createOrder = asyncHandler(async (req, res) => {
         description: updatedOrder.description,
         service_type: updatedOrder.service_type,
         additional_info: updatedOrder.additional_info,
+        status: updatedOrder.status,
       });
     } else {
       res.status(404);
-      throw new Error("User not found");
+      throw new Error("Order not found");
     }
   });
   
@@ -114,10 +118,10 @@ const createOrder = asyncHandler(async (req, res) => {
     const order = await Order.findOne(req.order._id);
   
     if (order) {
-        const { _id, firstName, lastName, email, pickup_add, destination, phone, weight, description, service_type, additional_info } = order;
+        const { _id, firstName, lastName, email, pickup_add, destination, phone, weight, description, service_type, additional_info, status } = order;
   
       res.status(200).json({
-        _id, firstName, lastName, email, pickup_add, destination, phone, weight, description, service_type, additional_info
+        _id, firstName, lastName, email, pickup_add, destination, phone, weight, description, service_type, additional_info, status
       });
     } else {
       res.status(404);
